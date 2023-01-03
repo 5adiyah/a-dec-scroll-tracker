@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Tracker</title>
+</head>
+
+<body>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        body div#sticky {
+            position: fixed;
+            bottom: 1rem;
+            right: 4rem;
+        }
+
+        .tall {
+            height: 100vh;
+            background-color: #d6ebf8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tall:nth-child(even) {
+            background-color: #f3ded7;
+        }
+
+        .tall p {
+            width: 50%;
+            font-size: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            margin: 0;
+        }
+
+        .tall.data-show p {
+            opacity: 1;
+            transition: opacity 2s;
+        }
+    </style>
+
+    <div id="sticky">
+        <h2>Scroll: <span id="scroll">0</span></h2>
+    </div>
+
+    <div class="tall">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cumque, atque quos ratione ducimus aperiam
+            reiciendis, quaerat numquam tempore beatae distinctio eligendi non?</p>
+    </div>
+
+    <div class="tall">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cumque, atque quos ratione ducimus aperiam
+            reiciendis, quaerat numquam tempore beatae distinctio eligendi non?</p>
+    </div>
+
+    <div class="tall">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cumque, atque quos ratione ducimus aperiam
+            reiciendis, quaerat numquam tempore beatae distinctio eligendi non?</p>
+    </div>
+
+    <div class="tall">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cumque, atque quos ratione ducimus aperiam
+            reiciendis, quaerat numquam tempore beatae distinctio eligendi non?</p>
+    </div>
+
+    <div class="tall">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cumque, atque quos ratione ducimus aperiam
+            reiciendis, quaerat numquam tempore beatae distinctio eligendi non?</p>
+    </div>
+
+    <div class="tall">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt cumque, atque quos ratione ducimus aperiam
+            reiciendis, quaerat numquam tempore beatae distinctio eligendi non?</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            window.addEventListener("scroll", (event) => {
+                let scroll = window.scrollY;
+                document.getElementById('scroll').textContent = scroll;
+                console.log(scroll);
+
+                let scrollElements = document.querySelectorAll(".tall p");
+
+                for (let i = 0; i < scrollElements.length; i++) {
+                    element = scrollElements[i];
+                    let inView = element.getBoundingClientRect().top - window.innerHeight;
+                    if (inView < 0) {
+                        element.parentElement.classList.add('data-show');
+                        console.log(element);
+                    } else {
+                        element.parentElement.classList.remove('data-show');
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
